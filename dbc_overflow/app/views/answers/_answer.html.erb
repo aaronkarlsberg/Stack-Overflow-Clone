@@ -2,7 +2,14 @@
   <strong>Points:</strong>
   <div id="points" ><%= answer.points %> </div>
 </p>
+<div id="up">
 <%= button_to 'UpVote',upvote_question_answer_path(answer.question, answer), :class => 'upvote', :method => 'post' %>
+</div>
+
+<div id="down">
+<%= button_to 'DownVote',downvote_question_answer_path(answer.question, answer), :class => 'downvote', :method => 'post' %>
+</div>
+
 <p>
   <strong>Name:</strong>
   <%= answer.name %>

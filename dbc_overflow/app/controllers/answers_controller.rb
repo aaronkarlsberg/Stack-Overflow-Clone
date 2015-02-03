@@ -17,7 +17,9 @@ class AnswersController < ApplicationController
   def downvote
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
-    @answer.points -= 1
+    @points = @answer.points -= 1
+    @answer.save
+    render json: @points
   end
 
   def destroy
