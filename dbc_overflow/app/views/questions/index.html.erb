@@ -1,0 +1,24 @@
+<h1>Stack Overflow</h1>
+
+<%= link_to 'New question', new_question_path %>
+<br>
+<br>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+    <th colspan="2"></th>
+  </tr>
+
+<% @questions.each do |q| %>
+<td><%= q.title%></td>
+<td><%= q.content%></td>
+<td><%= link_to 'Show', q %></td>
+<td><%= link_to 'Edit', edit_question_path(q)%></td>
+<td><%= link_to 'Destroy', q, method: :delete,
+data: {confirm: 'Are you sure?'} %>
+</td>
+
+    </tr>
+  <%end%>
+</table>

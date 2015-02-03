@@ -1,0 +1,32 @@
+== README
+This is a Stack Over-flow clone created in a rails framework.
+
+* Ruby version
+  ruby 2.0.0p353 (2013-11-22 revision 43784).
+
+* Rails version
+  Rails 4.1.6
+
+* System dependencies
+  Refer to gemfile.
+
+* Configuration
+  Rails. Test evironment configured for rspec.
+
+* Database creation
+  prepare postgres DB.
+
+* Database initialization
+  create, migrate, seed.
+
+* How to run the test suite
+  Run Spec folder files
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+   Rails run.
+* ...
+
+
+<tt>rake doc:app</tt>.

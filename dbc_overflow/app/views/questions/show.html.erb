@@ -1,0 +1,20 @@
+<p>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @question.content %>
+</p>
+
+<%= link_to 'Back', questions_path %> |
+<%= link_to 'Edit', edit_question_path(@question) %>
+
+
+<h2>Answers</h2>
+<%= render @question.answers %>
+
+<h2>Answer this question:</h2>
+<%= render 'answers/form' %>
+
