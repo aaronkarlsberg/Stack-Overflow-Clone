@@ -16,16 +16,14 @@ Controller.prototype = {
     $("#down form.button_to").submit(this.downVote.bind(this));
   },
 
-  upVote: function(event){
+   upVote: function(event){
     event.preventDefault();
     var url = $("#up form.button_to").attr('action')
     $.ajax({
       url: url,
       type: 'post',
       dataType: 'json'
-      }).done(function(points){
-        $("#points").html(points)
-      });
+      }).done(this.view.upVote)
   },
 
   downVote: function(){
@@ -35,13 +33,10 @@ Controller.prototype = {
       url: url,
       type: 'post',
       dataType: 'json'
-    }).done(function(points){
-      $("#points").html(points)
-    });
+    }).done(this.view.downVote)
   }
 }
 
-// Leave for now.  Built in at top
 function View(){}
 
 View.prototype = {
@@ -55,8 +50,31 @@ View.prototype = {
 }
 
 
-// $(document).ready(function(){
-//   $(".upvote").click(function(){
-//     event.preventDefault();
-//   });
-// })
+
+
+
+
+//non-mvc
+  // upVote: function(event){
+  //   event.preventDefault();
+  //   var url = $("#up form.button_to").attr('action')
+  //   $.ajax({
+  //     url: url,
+  //     type: 'post',
+  //     dataType: 'json'
+  //     }).done(function(points){
+  //       $("#points").html(points)
+  //     });
+  // },
+
+  // downVote: function(){
+  //   event.preventDefault();
+  //   var url = $("#down form.button_to").attr('action')
+  //   $.ajax({
+  //     url: url,
+  //     type: 'post',
+  //     dataType: 'json'
+  //   }).done(function(points){
+  //     $("#points").html(points)
+  //   });
+  // }
