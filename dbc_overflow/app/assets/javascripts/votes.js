@@ -18,7 +18,7 @@ Controller.prototype = {
 
    upVote: function(event){
     event.preventDefault();
-    var url = $("#up form.button_to").attr('action')
+    var url = event.currentTarget.action;
     $.ajax({
       url: url,
       type: 'post',
@@ -26,9 +26,11 @@ Controller.prototype = {
       }).done(this.view.upVote)
   },
 
-  downVote: function(){
+  downVote: function(event){
     event.preventDefault();
-    var url = $("#down form.button_to").attr('action')
+    //var url = $("#down form.button_to").attr('action')
+
+    var url = event.currentTarget.action
     $.ajax({
       url: url,
       type: 'post',
@@ -41,7 +43,8 @@ function View(){}
 
 View.prototype = {
   upVote: function(points){
-    $("#points").html(points)
+    console.log()
+    // $(this).prop('#points').html(points)
   },
 
   downVote: function(points){
@@ -49,6 +52,7 @@ View.prototype = {
   }
 }
 
+// give points id that matches up with action id
 
 
 

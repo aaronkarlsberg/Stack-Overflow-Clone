@@ -25,6 +25,21 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def upvote
+    p "Rilke sucks"
+    @question = Question.find(params[:id])
+    @points = @question.points += 1
+    @question.save
+    render json: @points
+  end
+
+  def downvote
+    @question = Question.find(params[:id])
+    @points = @question.points -= 1
+    @question.save
+    render json: @points
+  end
+
   def update
     @question = Question.find(params[:id])
 

@@ -1,4 +1,15 @@
 <p>
+  <strong>Points:</strong>
+  <div class="points" ><%= @question.points %> </div>
+</p>
+<div id="up">
+<%= button_to 'UpVote', upvote_question_path(@question), :class => 'upvote', :method => 'post' %>
+</div>
+
+<div id="down">
+<%= button_to 'DownVote', downvote_question_path(@question), :class => 'downvote', :method => 'post' %>
+</div>
+<p>
   <strong>Title:</strong>
   <%= @question.title %>
 </p>

@@ -7,12 +7,14 @@
   <tr>
     <th>Title</th>
     <th>Text</th>
+    <th>Points</th>
     <th colspan="2"></th>
   </tr>
 
 <% @questions.each do |q| %>
 <td><%= q.title%></td>
 <td><%= q.content%></td>
+<td><%= q.points%></td>
 <td><%= link_to 'Show', question_path(q) %></td>
 <td><%= link_to 'Edit', edit_question_path(q)%></td>
 <td><%= link_to 'Destroy', q, method: :delete,
