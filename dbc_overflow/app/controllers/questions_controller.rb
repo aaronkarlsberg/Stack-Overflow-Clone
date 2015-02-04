@@ -30,15 +30,44 @@ class QuestionsController < ApplicationController
 
   def upvote
     @question = Question.find(params[:id])
-    @question.upvote
-
-    render json: @question.points
+    @vote_relationship = current_user.qvotes.where(question_id: @question.id)
+    if @vote_relationship.exists?
+      @vote_relationship[0].value = +1
+      @vote_relationship[0].save
+      @question.points = @question.qvotes.sum(:value)
+      p @question.points
+      @question.save
+      render json: @question.points
+    else
+      @user_vote = current_user.qvotes.create(question_id: @question.id)
+      @user_vote.value = +1
+      @user_vote.save
+      @question.points = @question.qvotes.sum(:value)
+      p @question.points
+      @question.save
+      render json: @question.points
+    end
   end
 
   def downvote
     @question = Question.find(params[:id])
-    @question.downvote
-    render json: @question.points
+    @vote_relationship = current_user.qvotes.where(question_id: @question.id)
+    if @vote_relationship.exists?
+      @vote_relationship[0].value = -1
+      @vote_relationship[0].save
+      @question.points = @question.qvotes.sum(:value)
+      p @question.points
+      @question.save
+      render json: @question.points
+    else
+      @user_vote = current_user.qvotes.create(question_id: @question.id)
+      @user_vote.value = -1
+      @user_vote.save
+      @question.points = @question.qvotes.sum(:value)
+      p @question.points
+      @question.save
+      render json: @question.points
+    end
   end
 
   def update
