@@ -8,4 +8,9 @@ class Question < ActiveRecord::Base
     self.points += 1
     save
   end
+
+  def downvote
+    self.points -= 1
+    save
+  end
 end
