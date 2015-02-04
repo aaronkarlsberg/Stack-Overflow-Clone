@@ -20,7 +20,6 @@ Controller.prototype = {
     event.preventDefault();
     var target = $(event.currentTarget.parentElement.parentElement).find(".points")
     var url = event.currentTarget.action;
-    // var view = this.view;
     var that = this
     $.ajax({
       url: url,

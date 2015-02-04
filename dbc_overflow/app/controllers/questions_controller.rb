@@ -13,6 +13,9 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find(params[:id])
+    if @question.user != current_user
+      redirect_to root_path
+    end
   end
 
   def create
@@ -40,19 +43,25 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
-
-    if @question.update(question_params)
-      redirect_to @question
+    if @question.user == current_user
+      if @question.update(question_params)
+        redirect_to @question
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      redirect_to root_path
     end
   end
 
   def destroy
     @question = Question.find(params[:id])
-    @question.destroy
-
-    redirect_to questions_path
+    if @question.user == current_user
+      @question.destroy
+      redirect_to root_path
+    else
+      redirect_to questions_path
+   end
   end
 
   private

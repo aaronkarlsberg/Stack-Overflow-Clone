@@ -3,3 +3,8 @@ class AddPointsToQuestions < ActiveRecord::Migration
     add_column :questions, :points, :integer, default: 0
   end
 end
+
+
+
+
+
