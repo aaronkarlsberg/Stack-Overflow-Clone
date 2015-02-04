@@ -4,7 +4,7 @@
   <div class="points" ><%= @question.points %> </div>
 </p>
 <div class="up">
-<%= button_to 'UpVote', upvote_question_path(@question), :class => 'upvote', :method => 'post' %>
+<%= button_to 'UpVote', upvote_question_path(@question), :class => 'upvote', :method => 'post', remote: true %>
 </div>
 
 <div class="down" >

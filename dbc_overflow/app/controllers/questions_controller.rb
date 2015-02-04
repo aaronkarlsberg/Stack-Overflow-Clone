@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  respond_to :js
+
   def index
     @questions = Question.all
   end
@@ -16,7 +18,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.buil(question_params)
 
     if @question.save
       redirect_to @question
@@ -28,9 +30,9 @@ class QuestionsController < ApplicationController
   def upvote
     p "Rilke sucks"
     @question = Question.find(params[:id])
-    @points = @question.points += 1
-    @question.save
-    render json: @points
+    @question.upvote
+
+    respond_with(@question)
   end
 
   def downvote
