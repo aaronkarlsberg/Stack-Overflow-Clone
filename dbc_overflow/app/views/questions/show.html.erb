@@ -1,3 +1,16 @@
+<div class="voter">
+  <p>
+  <strong>Points:</strong>
+  <div class="points" ><%= @question.points %> </div>
+</p>
+<div class="up">
+<%= button_to 'UpVote', upvote_question_path(@question), :class => 'upvote', :method => 'post' %>
+</div>
+
+<div class="down" >
+<%= button_to 'DownVote', downvote_question_path(@question), :class => 'downvote', :method => 'post' %>
+</div>
+</div>
 <p>
   <strong>Title:</strong>
   <%= @question.title %>

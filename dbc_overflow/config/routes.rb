@@ -3,8 +3,19 @@ Rails.application.routes.draw do
   root 'questions#index'
 
   resources :questions do
-    resources :answers
+    member do
+      post 'upvote'
+      post 'downvote'
+    end
+    resources :answers do
+      member do
+        post 'upvote'
+        post 'downvote'
+      end
+    end
   end
+
+# post '/answers/:id', to: 'answers#upvote'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
