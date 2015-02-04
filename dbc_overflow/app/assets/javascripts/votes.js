@@ -12,12 +12,13 @@ function Controller(view){
 Controller.prototype = {
 
   bindEventListeners: function(){
-    $("#up form.button_to").submit(this.upVote.bind(this));
-    $("#down form.button_to").submit(this.downVote.bind(this));
+    $(".up form.button_to").submit(this.upVote.bind(this));
+    $(".down form.button_to").submit(this.downVote.bind(this));
   },
 
    upVote: function(event){
     event.preventDefault();
+    target = $(event.currentTarget.parentElement.parentElement).find(".points")
     var url = event.currentTarget.action;
     $.ajax({
       url: url,
@@ -28,8 +29,7 @@ Controller.prototype = {
 
   downVote: function(event){
     event.preventDefault();
-    //var url = $("#down form.button_to").attr('action')
-
+    target = $(event.currentTarget.parentElement.parentElement).find(".points")
     var url = event.currentTarget.action
     $.ajax({
       url: url,
@@ -43,16 +43,19 @@ function View(){}
 
 View.prototype = {
   upVote: function(points){
-    console.log()
-    // $(this).prop('#points').html(points)
+   target.html(points);
   },
 
   downVote: function(points){
-    $("#points").html(points)
+    target.html(points);
   }
 }
 
-// give points id that matches up with action id
+
+
+
+
+
 
 
 

@@ -1,13 +1,15 @@
-<p>
-  <strong>Points:</strong>
-  <div id="points" ><%= answer.points %> </div>
-</p>
-<div id="up">
-<%= button_to 'UpVote',upvote_question_answer_path(answer.question, answer), :class => 'upvote', :method => 'post' %>
-</div>
+<div class="voter">
+  <p>
+    <strong>Points:</strong>
+    <div class="points" ><%= answer.points %> </div>
+  </p>
+  <div class="up">
+    <%= button_to 'UpVote',upvote_question_answer_path(answer.question, answer), :class => 'upvote', :method => 'post' %>
+  </div>
 
-<div id="down">
-<%= button_to 'DownVote',downvote_question_answer_path(answer.question, answer), :class => 'downvote', :method => 'post' %>
+  <div class="down">
+    <%= button_to 'DownVote',downvote_question_answer_path(answer.question, answer), :class => 'downvote', :method => 'post' %>
+  </div>
 </div>
 
 <p>
@@ -22,6 +24,6 @@
 
 <p>
   <%= link_to 'Delete', [answer.question, answer],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
+  method: :delete,
+  data: { confirm: 'Are you sure?' } %>
 </p>
