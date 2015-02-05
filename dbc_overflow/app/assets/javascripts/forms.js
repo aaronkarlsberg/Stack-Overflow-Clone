@@ -1,17 +1,17 @@
 $(document).ready(function(){
-   var view, controller
-   view = new View
-   controller = new Controller(view)
-   controller.bindEventListeners();
    $("#new_ques").on('click',function(e){
     e.preventDefault();
     $('.qform').css('display', 'block');
-
+    })
     $(".new_question").on("submit", function(){
       event.preventDefault();
       quesSubmit($(this).serialize());
-    })
    });
+   $(".new_answer").on("submit", function(){
+      event.preventDefault();
+      answSubmit($(this).serialize());
+   });
+
 });
 
 function quesSubmit(data){
@@ -20,20 +20,26 @@ function quesSubmit(data){
     $.ajax({
       url: url,
       type: 'post',
-      data: data,
-      dataType: 'json'
+      data: data
       }).done(function(response) {
-        console.log(response);
-        var questionel = $(".question_row").clone();
-        var title = response.title
-        var content = response.content
-        var points = response.points
-        questionel.find(".points").html(points)
-        questionel.find(".title").html(title)
-        questionel.find(".content").html(content)
-        $("#question_index").append(questionel)
+        $('#question_index').append($(response));
         $('input[type="text"], textarea').val('');
         $('.qform').css('display', 'none');
+      });
+}
+
+function answSubmit(data){
+    event.preventDefault();
+    var url = event.currentTarget.action;
+    $.ajax({
+      url: url,
+      type: 'post',
+      data: data
+      }).done(function(response) {
+        $('#answers').append($(response));
+        // $('input[type="text"], textarea').val('');
+        // $('.qform').css('display', 'none');
+        console.log(response)
       });
 }
 

@@ -26,7 +26,10 @@
 
 
 <h2>Answers</h2>
-<%= render @question.answers %>
+<div id="answers">
+<%@answers = @question.answers%>
+<%= render @answers %>
+</div>
 
 <h2>Answer this question:</h2>
 <%= render 'answers/form' %>

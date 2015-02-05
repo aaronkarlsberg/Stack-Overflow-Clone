@@ -12,18 +12,21 @@
     <th colspan="2"></th>
   </tr>
 <%= @response.parsed_response %>
-<tr class= "question_row">
+
 <% @questions.each do |q| %>
-<td class="title"><%= q.title%></td>
-<td class="content"><%= q.content%></td>
-<td class="points"><%= q.points%></td>
+<tr class= "question_row">
+<td><%= q.title%></td>
+<td><%= q.content%></td>
+<td><%= q.points%></td>
 <td><%= link_to 'Show', question_path(q) %></td>
 <td><% if current_user == q.user%><%= link_to 'Edit', edit_question_path(q)%></td>
 <td><%= link_to 'Destroy', q, method: :delete,
 data: {confirm: 'Are you sure?'} %>
 <%end%>
 </td>
-    </tr>
+  </tr>
   <%end%>
 </table>
+
+
 

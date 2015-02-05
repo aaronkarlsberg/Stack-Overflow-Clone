@@ -4,7 +4,8 @@ class AnswersController < ApplicationController
     @answer = @question.answers.create(answer_params)
     @answer.user = current_user
     @answer.save
-    redirect_to question_path(@question)
+    render partial: 'create'
+    # redirect_to question_path(@question)
   end
 
   def upvote
@@ -63,58 +64,3 @@ class AnswersController < ApplicationController
       params.require(:answer).permit(:name, :answer)
   end
 end
-
-
-# # up
-# @qvote = current_user.qvotes.where(question_id: @quesiton.id).first
-# if @qvote.exists?
-#   if @qvote.value == 1
-#     @error_message = "you have already up-voted, but you may downvote if you want to change your mind."
-#   elsif @qvote.value == 0
-#     @qvote.value = 1
-#     @question.upvote
-#     @qvote.save
-#     @question.save
-#   elsif @qvote.value == -1
-#     @qvote.value = 1
-#     @question.upvote
-#     @question.upvote
-#     @qvote.save
-#     @question.save
-#   end
-# else current_user.qvotes.create(question_id: @quesiton.id)
-#   @qvote.value = 1
-#   @question.upvote
-#   @qvote.save
-#   @question.save
-# end
-
-
-# # down
-# @qvote = current_user.qvotes.where(question_id: @quesiton.id).first
-# if @qvote.exists?
-#   if @qvote.value == -1
-#     @error_message = "you have already down-voted, but you may upvote if you want to change your mind."
-#   elsif @qvote.value = 0
-#     @qvote.value = -1
-#     @question.downvote
-#     @qvote.save
-#     @question.save
-#     render json: @question.points
-#   elsif @qvote.value = 1
-#     @qvote.value = -1
-#     @question.downvote
-#     @question.downvote
-#     @qvote.save
-#     @question.save
-#     render json: @question.points
-#   end
-# else current_user.qvotes.create(question_id: @quesiton.id)
-#   @qvote.value = -1
-#   @question.upvote
-#   @qvote.save
-#   @question.save
-#   render json: @question.points
-# end
-
-# # question.qvotes.sum(:value)

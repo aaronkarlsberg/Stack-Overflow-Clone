@@ -28,7 +28,10 @@ class QuestionsController < ApplicationController
 
     if @question.save
       # redirect_to @question
-      render json: @question
+      # render json: @question
+      p "*"*100
+      p @question
+      render partial: 'create'
     else
       render 'new'
     end

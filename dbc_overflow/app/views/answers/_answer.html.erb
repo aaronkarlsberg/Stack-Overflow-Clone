@@ -1,4 +1,6 @@
+
 <div class="voter">
+  <% @answers.each do |answer| %>
   <p>
     <strong>Points:</strong>
     <div class="points" ><%= answer.points %> </div>
@@ -27,3 +29,5 @@
   method: :delete,
   data: { confirm: 'Are you sure?' } %>
 </p>
+<%end%>
+
