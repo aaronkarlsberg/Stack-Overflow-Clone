@@ -10,7 +10,7 @@
     <th>Points</th>
     <th colspan="2"></th>
   </tr>
-
+<%= @response.parsed_response %>
 <% @questions.each do |q| %>
 <td><%= q.title%></td>
 <td><%= q.content%></td>
