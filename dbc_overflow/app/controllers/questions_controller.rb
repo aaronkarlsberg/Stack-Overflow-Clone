@@ -2,6 +2,7 @@
 
 class QuestionsController < ApplicationController
   def index
+    @question = Question.new
     @questions = Question.all
 
     @response = HTTParty.get("https://api.github.com/zen", :headers =>{"Authorization" => "token " + ENV["RESPONSE_TOKEN"], "User-Agent" => "xyz"})
@@ -26,7 +27,8 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.build(question_params)
 
     if @question.save
-      redirect_to @question
+      # redirect_to @question
+      render json: @question
     else
       render 'new'
     end

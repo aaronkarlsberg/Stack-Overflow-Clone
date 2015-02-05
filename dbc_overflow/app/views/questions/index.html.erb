@@ -1,9 +1,10 @@
 <h1>Stack Overflow</h1>
 
-<%= link_to 'New question', new_question_path %>
+<%= link_to 'New question', new_question_path, id: 'new_ques' %>
+<div class='qform'><%= render 'form' %></div>
 <br>
 <br>
-<table>
+<table id="question_index">
   <tr>
     <th>Title</th>
     <th>Text</th>
@@ -11,10 +12,11 @@
     <th colspan="2"></th>
   </tr>
 <%= @response.parsed_response %>
+<tr class= "question_row">
 <% @questions.each do |q| %>
-<td><%= q.title%></td>
-<td><%= q.content%></td>
-<td><%= q.points%></td>
+<td class="title"><%= q.title%></td>
+<td class="content"><%= q.content%></td>
+<td class="points"><%= q.points%></td>
 <td><%= link_to 'Show', question_path(q) %></td>
 <td><% if current_user == q.user%><%= link_to 'Edit', edit_question_path(q)%></td>
 <td><%= link_to 'Destroy', q, method: :delete,
@@ -24,3 +26,4 @@ data: {confirm: 'Are you sure?'} %>
     </tr>
   <%end%>
 </table>
+
