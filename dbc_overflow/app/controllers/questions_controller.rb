@@ -1,6 +1,10 @@
+
+
 class QuestionsController < ApplicationController
   def index
     @questions = Question.all
+
+    @response = HTTParty.get("https://api.github.com/zen", :headers =>{"Authorization" => "token " + ENV["RESPONSE_TOKEN"], "User-Agent" => "xyz"})
   end
 
   def show
