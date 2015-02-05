@@ -16,9 +16,10 @@
 <td><%= q.content%></td>
 <td><%= q.points%></td>
 <td><%= link_to 'Show', question_path(q) %></td>
-<td><%= link_to 'Edit', edit_question_path(q)%></td>
+<td><% if current_user == q.user%><%= link_to 'Edit', edit_question_path(q)%></td>
 <td><%= link_to 'Destroy', q, method: :delete,
 data: {confirm: 'Are you sure?'} %>
+<%end%>
 </td>
     </tr>
   <%end%>

@@ -4,7 +4,7 @@
   <div class="points" ><%= @question.points %> </div>
 </p>
 <div class="up">
-<%= button_to 'UpVote', upvote_question_path(@question), :class => 'upvote', :method => 'post' %>
+<%= button_to 'UpVote', upvote_question_path(@question), :class => 'upvote', :method => 'post'%>
 </div>
 
 <div class="down" >
@@ -22,7 +22,7 @@
 </p>
 
 <%= link_to 'Back', questions_path %> |
-<%= link_to 'Edit', edit_question_path(@question) %>
+<% if current_user == @question.user%> <%=link_to 'Edit', edit_question_path(@question) %><%end%>
 
 
 <h2>Answers</h2>

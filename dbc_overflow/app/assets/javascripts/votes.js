@@ -18,35 +18,40 @@ Controller.prototype = {
 
    upVote: function(event){
     event.preventDefault();
-    target = $(event.currentTarget.parentElement.parentElement).find(".points")
+    var target = $(event.currentTarget.parentElement.parentElement).find(".points")
     var url = event.currentTarget.action;
+    var that = this
     $.ajax({
       url: url,
       type: 'post',
       dataType: 'json'
-      }).done(this.view.upVote)
+      }).done(function(response) {
+        that.view.upVote(response, target)
+      })
   },
 
   downVote: function(event){
     event.preventDefault();
-    target = $(event.currentTarget.parentElement.parentElement).find(".points")
+    var target = $(event.currentTarget.parentElement.parentElement).find(".points")
     var url = event.currentTarget.action
+    var that = this
     $.ajax({
       url: url,
       type: 'post',
       dataType: 'json'
-    }).done(this.view.downVote)
+    }).done(function(response) {
+      that.view.downVote(response, target)
+    })
   }
 }
 
 function View(){}
 
 View.prototype = {
-  upVote: function(points){
+  upVote: function(points, target){
    target.html(points);
   },
-
-  downVote: function(points){
+  downVote: function(points, target){
     target.html(points);
   }
 }

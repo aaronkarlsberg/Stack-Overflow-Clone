@@ -13,10 +13,13 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find(params[:id])
+    if @question.user != current_user
+      redirect_to root_path
+    end
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.build(question_params)
 
     if @question.save
       redirect_to @question
@@ -26,35 +29,68 @@ class QuestionsController < ApplicationController
   end
 
   def upvote
-    p "Rilke sucks"
     @question = Question.find(params[:id])
-    @points = @question.points += 1
-    @question.save
-    render json: @points
+    @vote_relationship = current_user.qvotes.where(question_id: @question.id)
+    if @vote_relationship.exists?
+      @vote_relationship[0].value = +1
+      @vote_relationship[0].save
+      @question.points = @question.qvotes.sum(:value)
+      p @question.points
+      @question.save
+      render json: @question.points
+    else
+      @user_vote = current_user.qvotes.create(question_id: @question.id)
+      @user_vote.value = +1
+      @user_vote.save
+      @question.points = @question.qvotes.sum(:value)
+      p @question.points
+      @question.save
+      render json: @question.points
+    end
   end
 
   def downvote
     @question = Question.find(params[:id])
-    @points = @question.points -= 1
-    @question.save
-    render json: @points
+    @vote_relationship = current_user.qvotes.where(question_id: @question.id)
+    if @vote_relationship.exists?
+      @vote_relationship[0].value = -1
+      @vote_relationship[0].save
+      @question.points = @question.qvotes.sum(:value)
+      p @question.points
+      @question.save
+      render json: @question.points
+    else
+      @user_vote = current_user.qvotes.create(question_id: @question.id)
+      @user_vote.value = -1
+      @user_vote.save
+      @question.points = @question.qvotes.sum(:value)
+      p @question.points
+      @question.save
+      render json: @question.points
+    end
   end
 
   def update
     @question = Question.find(params[:id])
-
-    if @question.update(question_params)
-      redirect_to @question
+    if @question.user == current_user
+      if @question.update(question_params)
+        redirect_to @question
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      redirect_to root_path
     end
   end
 
   def destroy
     @question = Question.find(params[:id])
-    @question.destroy
-
-    redirect_to questions_path
+    if @question.user == current_user
+      @question.destroy
+      redirect_to root_path
+    else
+      redirect_to questions_path
+   end
   end
 
   private
