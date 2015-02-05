@@ -1,6 +1,6 @@
 <tr class="question_row">
-<td><%= @question.title%></td>
-<td><%= @question.content%></td>
+<td><%= markdown(@question.title)%></td>
+<td><%= markdown(@question.content)%></td>
 <td><%= @question.points%></td>
 <td><%= link_to 'Show', question_path(@question) %></td>
 <td><% if current_user == @question.user%><%= link_to 'Edit', edit_question_path(@question)%></td>

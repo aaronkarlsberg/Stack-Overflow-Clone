@@ -15,8 +15,8 @@
 
 <% @questions.each do |q| %>
 <tr class= "question_row">
-<td><%= q.title%></td>
-<td><%= q.content%></td>
+<td><%= markdown(q.title)%></td>
+<td><%= markdown(q.content)%></td>
 <td><%= q.points%></td>
 <td><%= link_to 'Show', question_path(q) %></td>
 <td><% if current_user == q.user%><%= link_to 'Edit', edit_question_path(q)%></td>
