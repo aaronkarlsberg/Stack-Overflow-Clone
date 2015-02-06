@@ -2,6 +2,7 @@ $(document).ready(function(){
    $("#new_ques").on('click',function(e){
     e.preventDefault();
     $('.qform').css('display', 'block');
+    $('#errorform').html("");
     })
     $(".new_question").on("submit", function(){
       event.preventDefault();
@@ -11,6 +12,7 @@ $(document).ready(function(){
       event.preventDefault();
       answSubmit($(this).serialize());
    });
+
 
 });
 
@@ -25,7 +27,16 @@ function quesSubmit(data){
         $('#question_index').append($(response));
         $('input[type="text"], textarea').val('');
         $('.qform').css('display', 'none');
-      });
+        $('#errorform').html("");
+
+      }).fail(function(response){
+         $('.qform').css('display', 'none');
+          $("#errorform").html(($(response.responseText)));
+           $(".new_question").on("submit", function(){
+            event.preventDefault();
+            quesSubmit($(this).serialize());
+           });
+      })
 }
 
 function answSubmit(data){

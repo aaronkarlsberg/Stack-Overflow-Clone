@@ -33,7 +33,7 @@ class QuestionsController < ApplicationController
       p @question
       render partial: 'create'
     else
-      render 'new'
+      render partial: 'form', status: 422
     end
   end
 
