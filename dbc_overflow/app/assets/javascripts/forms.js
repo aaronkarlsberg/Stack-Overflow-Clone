@@ -48,9 +48,10 @@ function answSubmit(data){
       data: data
       }).done(function(response) {
         $('#answers').append($(response));
-        // $('input[type="text"], textarea').val('');
-        // $('.qform').css('display', 'none');
+        $('input[type="text"], textarea').val('');
         console.log(response)
+      }).fail(function(){
+        alert("You need to enter both fields!")
       });
 }
 
